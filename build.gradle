@@ -1,11 +1,9 @@
-
-
 plugins {
-  id 'maven-publish'
-  id 'com.gradle.plugin-publish' version '0.10.0'
-  id 'java-gradle-plugin'
-  id 'eclipse'
-  id 'groovy'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '0.10.0'
+    id 'java-gradle-plugin'
+    id 'eclipse'
+    id 'groovy'
 }
 
 group = "edu.sc.seis"
@@ -15,9 +13,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-  compile gradleApi()
-  compile localGroovy() //not needed for Java plugins
-  // other dependencies that your plugin requires
+    implementation gradleApi()
+    implementation localGroovy() //not needed for Java plugins
+    // other dependencies that your plugin requires
 }
 
 publishing {
@@ -31,19 +29,19 @@ publishing {
 pluginBundle {
     website = 'https://github.com/crotwell/gradle-macappbundle'
     vcsUrl = 'https://github.com/crotwell/gradle-macappbundle.git'
-    tags = [ 'gradle', 'plugin', 'macappbundle', 'dmg', 'osx']
+    tags = ['gradle', 'plugin', 'macappbundle', 'dmg', 'osx']
 
 
 }
 
 gradlePlugin {
     plugins {
-      macappbundle {
-        id = 'edu.sc.seis.macAppBundle'
-        displayName = 'MacApp Bundle plugin'
-        description = 'A Gradle Plugin to create a Mac OSX .app application based on the project. '
-        implementationClass = 'edu.sc.seis.macAppBundle.MacAppBundlePlugin'
-      }
+        macappbundle {
+            id = 'edu.sc.seis.macAppBundle'
+            displayName = 'MacApp Bundle plugin'
+            description = 'A Gradle Plugin to create a Mac OSX .app application based on the project. '
+            implementationClass = 'edu.sc.seis.macAppBundle.MacAppBundlePlugin'
+        }
     }
 }
 
