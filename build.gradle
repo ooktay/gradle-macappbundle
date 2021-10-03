@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "edu.sc.seis"
-version = "2.3.0"
+version = "2.4.0"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -30,8 +30,6 @@ pluginBundle {
     website = 'https://github.com/crotwell/gradle-macappbundle'
     vcsUrl = 'https://github.com/crotwell/gradle-macappbundle.git'
     tags = ['gradle', 'plugin', 'macappbundle', 'dmg', 'osx']
-
-
 }
 
 gradlePlugin {

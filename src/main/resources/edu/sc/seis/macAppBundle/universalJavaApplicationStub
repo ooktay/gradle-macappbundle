@@ -261,6 +261,9 @@ else
 	# read the SplashFile name
 	JVMSplashFile=$(plist_get ':JVMSplashFile')
 
+	# read the SplashFile name
+	JAVA_HOME=$(plist_get ':JAVA_HOME')
+
 	# read the JVM Options as an array and retain spaces
 	IFS=$'\t\n'
 	JVMOptions=($(plist_get ':JVMOptions' | grep "    " | sed 's/^ *//g'))

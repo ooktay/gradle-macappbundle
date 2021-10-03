@@ -152,7 +152,8 @@ class MacAppBundlePluginExtension implements Serializable {
      * Defaults to false.
      */
     boolean bundleJRE = false;
-    
+    boolean bundleJDK = false;
+
     /** Directory from which to copy the JRE. Generally this will be the same as
     $JAVA_HOME or the result of /usr/libexec/java_home. Note that to be compatible
     with the appbundler utility from Oracle, this is usually the Contents/Home
@@ -165,7 +166,8 @@ class MacAppBundlePluginExtension implements Serializable {
     /Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home
     */
     String jreHome = ""
-    
+    String jdkHome = ""
+
     /** for codesign */
     String certIdentity = null
     
@@ -253,6 +255,18 @@ class MacAppBundlePluginExtension implements Serializable {
         return new File(getJreHome()).getParentFile().getParentFile().getName()
     }
 
+    public String getJDKDirName() {
+        return new File(getJdkHome()).getParentFile().getParentFile().getName()
+    }
+
+    String getJdkHome() {
+        // ensure jdkHome is set
+        if (jdkHome == null || jdkHome.length() == 0) {
+            throw new RuntimeException("jdkHome not set");
+        }
+        return jdkHome;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -283,7 +297,9 @@ class MacAppBundlePluginExtension implements Serializable {
         result = prime * result + ((bundleDevelopmentRegion == null) ? 0 : bundleDevelopmentRegion.hashCode());
         result = prime * result + ((arguments == null) ? 0 : arguments.hashCode());
         result = prime * result + (bundleJRE ? 1231 : 1237);
+        result = prime * result + (bundleJDK ? 1231 : 1237);
         result = prime * result + ((jreHome == null) ? 0 : jreHome.hashCode());
+        result = prime * result + ((jdkHome == null) ? 0 : jdkHome.hashCode());
         result = prime * result + ((certIdentity == null) ? 0 : certIdentity.hashCode());
         result = prime * result + ((codeSignCmd == null) ? 0 : codeSignCmd.hashCode());
         result = prime * result + (codeSignDeep ? 1231 : 1237);
@@ -403,10 +419,17 @@ class MacAppBundlePluginExtension implements Serializable {
             return false;
         if (bundleJRE != other.bundleJRE)
             return false;
+        if (bundleJDK != other.bundleJDK)
+            return false;
         if (jreHome == null) {
             if (other.jreHome != null)
                 return false;
         } else if (!jreHome.equals(other.jreHome))
+            return false;
+        if (jdkHome == null) {
+            if (other.jdkHome != null)
+                return false;
+        } else if (!jdkHome.equals(other.jdkHome))
             return false;
         if (certIdentity == null) {
             if (other.certIdentity != null)

@@ -78,6 +78,13 @@ class GenerateInfoPlistTask  extends DefaultTask {
                             string(jreVersion)
                         }
                     }
+                } else if (extension.bundleJDK) {
+                    File jdkHomeFile = new File(extension.getJdkHome());
+                    if (jdkHomeFile.exists()) {
+                        def jdkVersion = jdkHomeFile.getParentFile().getParentFile().getName()
+                        key('JAVA_HOME')
+                        string("Contents/JDK/${-> extension.getJDKDirName()}")
+                    }
                 }
                 key('JVMMainClassName')
                 string(extension.mainClassName)
